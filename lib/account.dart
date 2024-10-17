@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'customroute.dart';
+import 'login.dart';
+
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
 
@@ -46,7 +49,25 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 children: [
                   Expanded(
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        final RenderBox button =
+                            context.findRenderObject() as RenderBox;
+                        final Offset buttonPosition =
+                            button.localToGlobal(Offset.zero);
+                        final Size buttonSize = button.size;
+
+                        Navigator.of(context).push(
+                          CustomRouteTransition(
+                            page: const LoginScreen(),
+                            beginOffset: Offset(
+                              0,
+                              (buttonPosition.dy + buttonSize.height / 2) /
+                                      MediaQuery.of(context).size.height -
+                                  1,
+                            ),
+                          ),
+                        );
+                      },
                       icon: Image.asset('assets/google.png', height: 24),
                       label: const Text('Google'),
                       style: ElevatedButton.styleFrom(
@@ -83,60 +104,96 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  labelStyle: const TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade800),
+              const Row(
+                children: [
+                  Text(
+                    "Username",
+                    style: TextStyle(color: Colors.white),
                   ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: const TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade800),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                obscureText: _obscureText,
-                style: const TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: const TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey.shade800),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.blue),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _obscureText ? Icons.visibility : Icons.visibility_off,
-                      color: Colors.grey,
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'username',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        _obscureText = !_obscureText;
-                      });
-                    },
                   ),
-                ),
+                ],
+              ),
+              // email
+              const SizedBox(height: 20),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Email",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: 'email',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
+              // password
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Password",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: TextField(
+                      obscureText: _obscureText,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'xxxxxxx',
+                        labelStyle: const TextStyle(color: Colors.grey),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(

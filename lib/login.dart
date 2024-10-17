@@ -11,25 +11,47 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Center(
+              child: Image.asset(
+                'assets/google.png',
+                height: 40,
+                width: 40,
+              ),
+            ),
+            const SizedBox(height: 20),
             const Text(
               'Login',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-            const Text('Continue to Google'),
+            const Text(
+              'Continue to Google',
+              style: TextStyle(color: Colors.grey),
+            ),
             const SizedBox(height: 20),
-            const TextField(
+            TextField(
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                labelText: 'Email or Phone',
-                border: OutlineInputBorder(),
+                hintText: 'Email or Phone',
+                hintStyle: TextStyle(color: Colors.grey[600]),
+                filled: true,
+                fillColor: Colors.grey[800],
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide.none,
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -37,11 +59,16 @@ class LoginScreen extends StatelessWidget {
               'Forget Account?',
               style: TextStyle(color: Colors.blue),
             ),
-            const SizedBox(height: 20),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
+
+                backgroundColor: Colors.blue,
+                minimumSize: const Size(200, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               child: const Text('Next'),
             ),
