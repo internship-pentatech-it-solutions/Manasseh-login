@@ -16,14 +16,21 @@ Future<void> main() async {
   await Hive.initFlutter();
   
   // Register the adapter
-  // if (!Hive.isAdapterRegistered(0)) {
-  //   Hive.registerAdapter(UserAdapter());
-  // }
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter(UserAdapter());
+  }
   
   // Open the box
   await Hive.openBox<User>('users');
   runApp(const MyApp());
 }
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Hive.initFlutter();
+//   Hive.registerAdapter(UserAdapter());
+//   await Hive.openBox<User>('users');
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
