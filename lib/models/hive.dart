@@ -1,4 +1,3 @@
-// First create user_model.dart
 import 'package:hive/hive.dart';
 
 
